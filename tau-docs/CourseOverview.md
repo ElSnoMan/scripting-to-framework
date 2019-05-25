@@ -1,4 +1,4 @@
-# Intro
+# Chapter 0 -Intro
 Hi, my name is Carlos Kidman and welcome to my course:
 "From Scripting to Framework with Selenium and C#"
 
@@ -21,7 +21,7 @@ Topics that we'll be covering include:
 
 There will be a lot of coding, so I hope you're as excited as I am to get started! Let's go!
 
-# Machine Setup
+# Chapter 1 - Machine Setup
 There are only two requirements:
 
 1. You need .NET Core 2.1 or greater installed
@@ -89,7 +89,7 @@ You may have already noticed that my terminal and VS Code looks different than y
 
 You made it! You are now ready to start coding.
 
-# Script Some Tests
+# Chapter 2 - Script Some Tests
 We'll be using statsroyale.com as our Application Under Test and we'll start with 2 tests:
 
 1. Assert the Ice Spirit card is on Cards page
@@ -140,7 +140,7 @@ We were able to write these two tests relatively quickly, but hopefully you can 
 
 This is what the concept of the Framework is looking to solve. There are many more issues with what we've currently implemented, but it's time to start refactoring and optimizing our code to solve the scripting problems.
 
-# Page Object Model
+# Chapter 3 - Page Object Model
 Refactoring - the Beginnings of a Framework
 
 We're currently working with 3 objects:
@@ -211,7 +211,7 @@ Let's make a `GetCardType()` method which returns a tuple of <string, string> an
 Great work! Our test is looking much better and we don't have complicated logic exposed in the test so it's easy to follow.
 Does that mean we're done? Of course not! There is much more work to be done...
 
-# Model Objects - Structuring our Test Objects
+# Chapter 4 - Model Objects
 In our second test, we had 4 assertions. That is a valid strategy, but we are working with many different cards that have many different properties. Let's make a 3rd test that validates a different card - "Mirror"
 
 1. Copy + paste the 2nd test and change test name to "Mirror..."
