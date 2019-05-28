@@ -6,6 +6,8 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using Royale.Pages;
 
+
+
 namespace Tests
 {
     [TestFixture, Parallelizable]
