@@ -6,8 +6,6 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using Royale.Pages;
 
-
-
 namespace Tests
 {
     [TestFixture, Parallelizable]
@@ -32,6 +30,7 @@ namespace Tests
 
         [Test, Parallelizable(ParallelScope.Children)]
         [TestCaseSource("cardNames")]
+        [Category("regression")]
         public void Card_is_on_cards_page(string name)
         {
             var cardsPage = new CardsPage(driver).Goto();
@@ -40,6 +39,7 @@ namespace Tests
 
         [Test, Parallelizable(ParallelScope.Children)]
         [TestCaseSource("cardNames")]
+        [Category("regression")]
         public void Base_Metrics_are_correct_on_Card_Details_page(string name)
         {
             var cardsPage = new CardsPage(driver).Goto();
