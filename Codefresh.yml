@@ -14,7 +14,7 @@ steps:
   MyUnitTests:
     title: Unit test
     stage: test
-    image: 'microsoft/dotnet:3.0-alpine' # mcr.microsoft.com/dotnet/core/runtime:3.0-alpine
+    image: 'mcr.microsoft.com/dotnet/core/runtime:3.0-alpine' # microsoft/dotnet:3.0-alpine
     commands:
       - dotnet test --filter testcategory=unit
   MyAppDockerImage:
