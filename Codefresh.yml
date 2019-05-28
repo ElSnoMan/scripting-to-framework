@@ -14,7 +14,6 @@ steps:
   MyUnitTests:
     title: Unit test
     stage: test
-    # [OLD] microsoft/dotnet:3.0-alpine, [NEW] mcr.microsoft.com/dotnet/core/runtime
     image: 'mcr.microsoft.com/dotnet/core/sdk:3.0-alpine'
     commands:
       - dotnet test --filter testcategory=unit
