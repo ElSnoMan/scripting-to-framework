@@ -2,7 +2,7 @@ using Framework.Models;
 
 namespace Framework.Services
 {
-    public class CardService : ICardService
+    public class InMemoryCardService : ICardService
     {
         public Card GetCard(string name)
         {

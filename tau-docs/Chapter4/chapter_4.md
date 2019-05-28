@@ -31,7 +31,7 @@ When objects have things in common, we call them "base attributes" or "base prop
 This may be a good time to pause the video if you would like to do some more research on Abstract classes, Base classes, Interfaces, Generics, and Polymorphism. Or you could keep following along and researching those later. Whatever works for you!
 
 1. Create a Card.cs file in Models directory
-2. Add the properties, but mark them with the `virtual` keyword. This keyword means that classes that inherit this class can override them to give them new functionality.
+2. Add the properties, but mark them with the `virtual` keyword. This keyword means that classes that inherit this class can override them to give them new functionality and/or values.
 3. Have MirrorCard inherit Card
 4. You get some warnings real quick that say you are not overriding the members of the base class. Let's add those override keyword.
 5. Now let's make the Ice Spirit card inherit the Card base class as well.
@@ -53,10 +53,10 @@ But we're still not done! The last refactor we'll implement is to create a Servi
 
 Interfaces are rules or contracts that must be followed by any class that implements them. This is powerful because it guarantees that multiple classes will have the same method names or signatures. This will make more sense later on.
 
-1. Now create a CardService.cs class and implement ICardService
+1. Now create a InMemoryCardService.cs class and implement ICardService
 2. You get an error because we are not adhering to the contract
 3. We'll implement the missing method which is pretty straightforward
-4. Then change our tests to use the new CardService.
+4. Then change our tests to use the new InMemoryCardService.
 
 Test 2 and 3 are now almost identical because of our refactorings. This enables us to re-use our Test Methods by using the [TestCase] attribute from the NUnit test framework.
 
@@ -71,5 +71,6 @@ Test 2 and 3 are now almost identical because of our refactorings. This enables 
 By now you've noticed that we are running the tests one at a time. We can greatly improve our Test Run Time by running our tests in parallel.
 
 1. Add [Test, Parallelizable(ParallelScope.Children)] to make them run in parallel
-2. Run the tests
-3. We currently can't run in parellel... We get an error because all the tests are sharing the same driver. That's what we need to fix next.
+2. Add [Category("cards")]
+2. Run the tests using `dotnet test --filter testcategory=cards`
+3. But we currently can't run in parellel! We get an error because all the tests are sharing the same driver. That's what we need to fix next.

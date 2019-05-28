@@ -46,7 +46,7 @@ namespace Tests
             cardsPage.GetCardByName(name).Click();
 
             var cardOnPage = new CardDetailsPage(driver).GetBaseCard();
-            var card = new CardService().GetCard(name);
+            var card = new InMemoryCardService().GetCard(name);
 
             Assert.AreEqual(card.Name, cardOnPage.Name);
             Assert.AreEqual(card.Category, cardOnPage.Category);
