@@ -1,5 +1,6 @@
 using System;
 using Framework.Models;
+using Framework.Selenium;
 using Framework.Services;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -11,19 +12,18 @@ namespace Tests
     [Parallelizable]
     public class CardTests
     {
-        IWebDriver driver;
-
         [SetUp]
         public void Setup()
         {
-            driver = new ChromeDriver();
-            driver.Url = "https://statsroyale.com";
+            Driver.Init();
+            Pages.Init();
+            Driver.Goto("statsroyale.com");
         }
 
         [TearDown]
         public void Teardown()
         {
-            driver.Quit();
+            Driver.Current.Quit();
         }
 
         static string[] cardNames = { "Ice Spirit", "Mirror" };
@@ -33,8 +33,8 @@ namespace Tests
         [Category("cards")]
         public void Card_is_on_cards_page(string name)
         {
-            var cardsPage = new CardsPage(driver).Goto();
-            Assert.That(cardsPage.GetCardByName(name).Displayed);
+            var card = Pages.Cards.Goto().GetCardByName(name);
+            Assert.That(card.Displayed);
         }
 
         [Test, Parallelizable(ParallelScope.Children)]
@@ -42,10 +42,8 @@ namespace Tests
         [Category("cards")]
         public void Base_Metrics_are_correct_on_Card_Details_page(string name)
         {
-            var cardsPage = new CardsPage(driver).Goto();
-            cardsPage.GetCardByName(name).Click();
-
-            var cardOnPage = new CardDetailsPage(driver).GetBaseCard();
+            Pages.Cards.Goto().GetCardByName(name).Click();
+            var cardOnPage = Pages.CardDetails.GetBaseCard();
             var card = new InMemoryCardService().GetCardByName(name);
 
             Assert.AreEqual(card.Name, cardOnPage.Name);

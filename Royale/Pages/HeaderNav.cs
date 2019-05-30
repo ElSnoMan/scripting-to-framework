@@ -1,4 +1,5 @@
 using System;
+using Framework.Selenium;
 using OpenQA.Selenium;
 
 namespace Royale.Pages
@@ -7,9 +8,9 @@ namespace Royale.Pages
     {
         public readonly TopNavMap Map;
 
-        public TopNav(IWebDriver driver)
+        public TopNav()
         {
-            Map = new TopNavMap(driver);
+            Map = new TopNavMap();
         }
 
         public void GotoCards()
@@ -20,13 +21,6 @@ namespace Royale.Pages
 
     public class TopNavMap
     {
-        private readonly IWebDriver _driver;
-
-        public TopNavMap(IWebDriver driver)
-        {
-            _driver = driver;
-        }
-
-        public IWebElement CardsTab => _driver.FindElement(By.CssSelector("a[href='/cards']"));
+        public IWebElement CardsTab => Driver.FindElement(By.CssSelector("a[href='/cards']"));
     }
 }

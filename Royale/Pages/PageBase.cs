@@ -6,9 +6,9 @@ namespace Royale.Pages
     {
         public readonly  TopNav TopNav;
 
-        public PageBase(IWebDriver driver)
+        public PageBase()
         {
-            TopNav = new TopNav(driver);
+            TopNav = new TopNav();
         }
     }
 }
