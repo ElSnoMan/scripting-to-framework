@@ -4,6 +4,6 @@ namespace Framework.Services
 {
     public interface ICardService
     {
-        Card GetCard(string name);
+        Card GetCardByName(string name);
     }
 }

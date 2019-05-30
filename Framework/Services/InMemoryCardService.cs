@@ -4,7 +4,7 @@ namespace Framework.Services
 {
     public class InMemoryCardService : ICardService
     {
-        public Card GetCard(string name)
+        public Card GetCardByName(string name)
         {
             switch (name)
             {

@@ -17,7 +17,6 @@ Next, we'll add Selenium to our Tests project so we can start using Selenium! Pa
 4. Open Royale.Tests.csproj file to view details about this project. You'll see Selenium has been added!
 
 ## Rundown of NUnit basics
-To turn a class into a Test Class, we decorate it with the `[TestFixture]` attribute
 To turn a method into a Test Method, we decorate it with the `[Test]` attributes
 The [SetUp] attribute means this method will be run before each test.
 The [TearDown] attribute means this method will be run after each test.

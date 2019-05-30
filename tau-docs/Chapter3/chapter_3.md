@@ -36,13 +36,14 @@ We'll start cleaning the first test by refactoring things out of the Royale.Test
 #### HeaderNav POM
 1. Let's add our first element to the HeaderNavMap - the Cards tab
     - `public IWebElement` raises an error because Selenium isn't in the Royale project
-2. `PackSharp: Bootstrap Selenium` targeting Royale
+2. `PackSharp: Bootstrap Selenium` targeting Framework
 3. `PackSharp: Remove Package` to remove both Selenium packages from Royale.Tests
-4. Bring in Selenium `using statements`
-5. `=> driver.FindElement` raises an error because `driver` doesn't exist in this class anywhere. It doesn't know what driver is! We need to define what it is in this class. In our test, we defined driver as an `IWebDriver`, so that's all we need to do here as well.
-6. We'll declare it just like we did in the test class, but this time we'll also include a Constructor method. This method is run any time we make a `new` instance of this map. That will make more sense real soon.
-7. In our Page class, we need to create an action to go to cards page
-8. Define the map, add a constructor, and pass in an IWebDriver
+4. `PackSharp: Add Reference` from Framework => Royale and Royale => Royale.Tests
+5. Bring in Selenium `using statements`
+6. `=> driver.FindElement` raises an error because `driver` doesn't exist in this class anywhere. It doesn't know what driver is! We need to define what it is in this class. In our test, we defined driver as an `IWebDriver`, so that's all we need to do here as well.
+7. We'll declare it just like we did in the test class, but this time we'll also include a Constructor method. This method is run any time we make a `new` instance of this map. That will make more sense real soon.
+8. In our Page class, we need to create an action to go to cards page
+9. Define the map, add a constructor, and pass in an IWebDriver
 
 #### CardsPage POM
 1. Create CardsPage.cs
@@ -63,8 +64,8 @@ We'll start cleaning the first test by refactoring things out of the Royale.Test
 3. Define driver, add a constructor, and pass in an IWebDriver
 4. Hopefully you are seeing the pattern here, because each page is going to be following the same steps to get it started.
 5. The logic for getting information on this page is a bit more complicated, so we'll create methods to handle that for us.
-Let's make a `GetCardType()` method which returns a tuple of <string, string> and a `GetCardRarity()` method that returns a string.
+Let's make a `GetCardCategory()` method which returns a tuple of <string, string>
 6. Update the test so it's cleaner
 
-Great work! Our test is looking much better and we don't have complicated logic exposed in the test so it's easy to follow.
+Great work! Our test is looking much better and we don't have complicated logic exposed in the test so it's easier to follow.
 Does that mean we're done? Of course not! There is much more work to be done...

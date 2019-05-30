@@ -8,7 +8,7 @@ using Royale.Pages;
 
 namespace Tests
 {
-    [TestFixture, Parallelizable]
+    [Parallelizable]
     public class CardTests
     {
         IWebDriver driver;
@@ -30,7 +30,7 @@ namespace Tests
 
         [Test, Parallelizable(ParallelScope.Children)]
         [TestCaseSource("cardNames")]
-        [Category("regression")]
+        [Category("cards")]
         public void Card_is_on_cards_page(string name)
         {
             var cardsPage = new CardsPage(driver).Goto();
@@ -39,14 +39,14 @@ namespace Tests
 
         [Test, Parallelizable(ParallelScope.Children)]
         [TestCaseSource("cardNames")]
-        [Category("regression")]
+        [Category("cards")]
         public void Base_Metrics_are_correct_on_Card_Details_page(string name)
         {
             var cardsPage = new CardsPage(driver).Goto();
             cardsPage.GetCardByName(name).Click();
 
             var cardOnPage = new CardDetailsPage(driver).GetBaseCard();
-            var card = new InMemoryCardService().GetCard(name);
+            var card = new InMemoryCardService().GetCardByName(name);
 
             Assert.AreEqual(card.Name, cardOnPage.Name);
             Assert.AreEqual(card.Category, cardOnPage.Category);
