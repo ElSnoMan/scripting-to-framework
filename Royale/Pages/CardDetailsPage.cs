@@ -26,9 +26,8 @@ namespace Royale.Pages
             {
                 Name = Map.CardName.Text,
                 Rarity = Map.CardRarity.Text.Split('\n').Last(),
-                Category = category,
-                Arena = arena,
-                Description = Map.CardDescription.Text
+                Type = category,
+                Arena = arena
             };
         }
 
@@ -42,8 +41,6 @@ namespace Royale.Pages
     public class CardDetailsPageMap
     {
         public IWebElement CardName => Driver.FindElement(By.CssSelector("div[class*='cardName']"));
-
-        public IWebElement CardDescription => Driver.FindElement(By.CssSelector(".card__description"));
 
         public IWebElement CardCategory => Driver.FindElement(By.CssSelector("div[class*='card__rarity']"));
 

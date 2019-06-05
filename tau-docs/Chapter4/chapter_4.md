@@ -23,10 +23,9 @@ Slowly getting there, but we can't use MirrorCard for the Ice Spirit test. Befor
 
 1. Name
 2. Cost
-3. Description
-4. Rarity
-5. Category
-6. Arena
+3. Rarity
+4. Type
+5. Arena
 
 When objects have things in common, we call them "base attributes" or "base properties". If you remember, we created a PageBase class that the other Page Objects inherited from. We'll be doing the same thing here.
 

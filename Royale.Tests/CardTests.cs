@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Framework.Models;
 using Framework.Selenium;
 using Framework.Services;
@@ -26,28 +28,34 @@ namespace Tests
             Driver.Current.Quit();
         }
 
-        static string[] cardNames = { "Ice Spirit", "Mirror" };
+        IList<Card> apiCards = new ApiCardService().GetAllCards();
 
-        [Test, Parallelizable(ParallelScope.Children)]
-        [TestCaseSource("cardNames")]
-        [Category("cards")]
-        public void Card_is_on_cards_page(string name)
+        [Test]
+        public void Mirror_is_on_cards_page()
         {
-            var card = Pages.Cards.Goto().GetCardByName(name);
+            var card = Pages.Cards.Goto().GetCardByName("Mirror");
             Assert.That(card.Displayed);
         }
 
         [Test, Parallelizable(ParallelScope.Children)]
-        [TestCaseSource("cardNames")]
+        [TestCaseSource("apiCards")]
         [Category("cards")]
-        public void Base_Metrics_are_correct_on_Card_Details_page(string name)
+        public void Card_is_on_cards_page(Card apiCard)
         {
-            Pages.Cards.Goto().GetCardByName(name).Click();
+            var card = Pages.Cards.Goto().GetCardByName(apiCard.Name);
+            Assert.That(card.Displayed);
+        }
+
+        [Test, Parallelizable(ParallelScope.Children)]
+        [TestCaseSource("apiCards")]
+        [Category("cards")]
+        public void Base_Metrics_are_correct_on_Card_Details_page(Card card)
+        {
+            Pages.Cards.Goto().GetCardByName(card.Name).Click();
             var cardOnPage = Pages.CardDetails.GetBaseCard();
-            var card = new InMemoryCardService().GetCardByName(name);
 
             Assert.AreEqual(card.Name, cardOnPage.Name);
-            Assert.AreEqual(card.Category, cardOnPage.Category);
+            Assert.AreEqual(card.Type, cardOnPage.Type);
             Assert.AreEqual(card.Arena, cardOnPage.Arena);
             Assert.AreEqual(card.Rarity, cardOnPage.Rarity);
         }
