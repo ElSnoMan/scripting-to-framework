@@ -14,7 +14,7 @@ namespace Royale.Pages
 
         public CardsPage Goto()
         {
-            TopNav.GotoCards();
+            HeaderNav.GotoCards();
             return this;
         }
 

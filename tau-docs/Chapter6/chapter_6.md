@@ -36,6 +36,7 @@ Having this is obviously helpful, but we want to leverage it in our Framework so
 With our ApiCardService complete, we can use them with our existing tests to validate ALL of the cards instead of the two we defined.
 
 1. Replace `cardsNames` with `apiCards` that uses our ApiCardService.GetAllCards()
+    - static IList<Card> apiCards = new ApiCardService.GetAllCards();
 2. Update the [TestCaseSource] of each test to use "apiCards"
 3. Update the `string name` parameter to `Card apiCard`
 4. If you want to run the tests, just make sure to specify the number of test workers to use because there are a lot more than just 2 cards now

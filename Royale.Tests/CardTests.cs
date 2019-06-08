@@ -28,7 +28,7 @@ namespace Tests
             Driver.Current.Quit();
         }
 
-        IList<Card> apiCards = new ApiCardService().GetAllCards();
+        static IList<Card> apiCards = new ApiCardService().GetAllCards();
 
         [Test]
         public void Mirror_is_on_cards_page()

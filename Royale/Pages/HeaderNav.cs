@@ -4,13 +4,13 @@ using OpenQA.Selenium;
 
 namespace Royale.Pages
 {
-    public class TopNav
+    public class HeaderNav
     {
-        public readonly TopNavMap Map;
+        public readonly HeaderNavMap Map;
 
-        public TopNav()
+        public HeaderNav()
         {
-            Map = new TopNavMap();
+            Map = new HeaderNavMap();
         }
 
         public void GotoCards()
@@ -19,8 +19,10 @@ namespace Royale.Pages
         }
     }
 
-    public class TopNavMap
+    public class HeaderNavMap
     {
         public IWebElement CardsTab => Driver.FindElement(By.CssSelector("a[href='/cards']"));
+
+        public IWebElement DeckBuilderTab => Driver.FindElement(By.CssSelector("a[href='/deckbuilder']"));
     }
 }

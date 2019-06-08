@@ -4,11 +4,11 @@ namespace Royale.Pages
 {
     public abstract class PageBase
     {
-        public readonly  TopNav TopNav;
+        public readonly HeaderNav HeaderNav;
 
         public PageBase()
         {
-            TopNav = new TopNav();
+            HeaderNav = new HeaderNav();
         }
     }
 }
