@@ -1,5 +1,5 @@
 # Copy Deck Test Suite
-Project Structure and more endpoints
+Flow Through Multiple Pages and WebDriverWait
 
 The last suite of tests will be around the site's Deckbuilder functionality.
 On the Deck Builder page, users have the option to Copy the Deck.
@@ -8,11 +8,13 @@ We want to write tests against this page.
 
 There are a few scenarios:
 1. User has the app installed and clicks Yes to copy the deck
-2. User doesn't have the app installed and opens the App Store
-3. User doesn't have the app installed and opens the Google Play Store
+2. User doesn't have the app installed and opens App Store
+3. User doesn't have the app installed and opens Google Play
 4. The Deck the user wants to copy from the Deck Builder Page is the same deck that is displayed on Copy Deck Page
 
 The first 3 scenarios are straightforward, but the last scenario has a very high number of combinations since Decks consist of 8 cards and we have 93 total cards...
+
+In this Chapter we'll only write the first 3 tests, but we'll get to the 4th test later on.
 
 ## Create the first Copy Deck test
 We'll start with the easiest test which is that the user can copy the deck.
@@ -51,7 +53,7 @@ Great! Now let's refactor it out into Page Objects
 6. Add DeckBuilderPage to Pages wrapper
 7. Update the test to use Pages.DeckBuilder
 
-## Refactor the CopyDeckPage actions
+### Refactor the CopyDeckPage actions
 1. Create the Pages.CopyDeckPage class
 2. Create Copy() or Yes() method
 3. Add CopyDeckPage to Pages wrapper
@@ -84,3 +86,20 @@ All that's left to do is to refactor the "waits" in the test into their respecti
 2. Add second wait into Yes() method
 
 Now the test is much more clear while still having the functionality we need. Great work!
+
+## Write the 2nd and 3rd Tests
+1. Make two new test methods
+    - User_opens_app_store()
+    - User_opens_play_store()
+2. Copy + Paste the first two steps from first test
+3. Add No() method to Pages.CopyDeckPage
+4. Add OpenAppStore() and OpenGooglePlay() methods.
+5. Add these methods to your test
+6. Assert the title is equal to Driver.Title. We don't have a "Title" property on Driver, so we need to add it.
+    - `public static string Title => Current.Title;`
+7. Run the tests and we get a failure saying that a different element was gonna get clicked. The issue is, when we get to the CopyDeck page, a Cookie Consent popup is displayed and covers the app store buttons. Fortunately, the error message is pretty helpful, but it would have been nice to see some logs and a screenshot to quickly diagnose and solve the problem.
+8. Add an AcceptCookies() method and add that to our No() method
+    - public void AcceptCookies()
+    - Map.AcceptCookiesButton.Click();
+    - Driver.Wait.Until(drvr => !Map.AcceptCookiesButton.Displayed);
+9. Re-run the tests. They pass!

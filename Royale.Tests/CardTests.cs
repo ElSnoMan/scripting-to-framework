@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Framework;
 using Framework.Models;
 using Framework.Selenium;
 using Framework.Services;
@@ -14,18 +15,25 @@ namespace Tests
     [Parallelizable]
     public class CardTests
     {
-        [SetUp]
-        public void Setup()
+        [OneTimeSetUp]
+        public void BeforeAll()
         {
+            FW.CreateTestResultsDirectory();
+        }
+
+        [SetUp]
+        public void BeforeEach()
+        {
+            FW.SetLogger();
             Driver.Init();
             Pages.Init();
             Driver.Goto("statsroyale.com");
         }
 
         [TearDown]
-        public void Teardown()
+        public void AfterEach()
         {
-            Driver.Current.Quit();
+            Driver.Quit();
         }
 
         static IList<Card> apiCards = new ApiCardService().GetAllCards();
