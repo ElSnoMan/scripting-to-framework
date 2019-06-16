@@ -15,14 +15,12 @@ namespace Royale.Pages
 
         public DeckBuilderPage Goto()
         {
-            FW.Log.Step("Click Deck Builder link");
-            HeaderNav.Map.DeckBuilderTab.Click();
+            HeaderNav.Map.DeckBuilderLink.Click();
             return this;
         }
 
         public void AddCardsManually()
         {
-            FW.Log.Step("Click Add Cards Manually link");
             Map.AddCardsManuallyLink.Click();
             Driver.Wait.Until(drvr => Map.CopyDeckIcon.Displayed);
         }
@@ -35,19 +33,18 @@ namespace Royale.Pages
 
         public void CopySuggestedDeck()
         {
-            FW.Log.Step("Click Copy Deck icon");
             Map.CopyDeckIcon.Click();
         }
     }
 
     public class DeckBuilderPageMap
     {
-        public IWebElement LoadCollectionTagField => Driver.FindElement(By.CssSelector(".deckBuilderInput__input > [placeholder='Tag #XXXXXX']"));
+        public Element LoadCollectionTagField => Driver.FindElement(By.CssSelector(".deckBuilderInput__input > [placeholder='Tag #XXXXXX']"), "Load Collection Field");
 
-        public IWebElement LoadCollectionButton => Driver.FindElement(By.XPath("//button/span[contains(text(), 'Load Collection')]"));
+        public Element LoadCollectionButton => Driver.FindElement(By.XPath("//button/span[contains(text(), 'Load Collection')]"), "Load Collection Button");
 
-        public IWebElement AddCardsManuallyLink => Driver.FindElement(By.XPath("//*[text()='add cards manually']"));
+        public Element AddCardsManuallyLink => Driver.FindElement(By.XPath("//*[text()='add cards manually']"), "Add Cards Manually Link");
 
-        public IWebElement CopyDeckIcon => Driver.FindElement(By.CssSelector(".copyButton"));
+        public Element CopyDeckIcon => Driver.FindElement(By.CssSelector(".copyButton"), "Copy Deck Icon");
     }
 }

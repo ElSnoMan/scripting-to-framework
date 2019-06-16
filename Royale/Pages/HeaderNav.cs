@@ -15,14 +15,14 @@ namespace Royale.Pages
 
         public void GotoCards()
         {
-            Map.CardsTab.Click();
+            Map.CardsLink.Click();
         }
     }
 
     public class HeaderNavMap
     {
-        public IWebElement CardsTab => Driver.FindElement(By.CssSelector("a[href='/cards']"));
+        public Element CardsLink => Driver.FindElement(By.CssSelector("a[href='/cards']"), "Cards Link");
 
-        public IWebElement DeckBuilderTab => Driver.FindElement(By.CssSelector("a[href='/deckbuilder']"));
+        public Element DeckBuilderLink => Driver.FindElement(By.CssSelector("a[href='/deckbuilder']"), "Deck Builder Link");
     }
 }

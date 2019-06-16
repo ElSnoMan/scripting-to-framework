@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
@@ -35,14 +36,14 @@ namespace Framework.Selenium
             Current.Navigate().GoToUrl(url);
         }
 
-        public static IWebElement FindElement(By by)
+        public static Element FindElement(By by, string elementName)
         {
-            return Current.FindElement(by);
+            return new Element(Current.FindElement(by), elementName);
         }
 
-        public static IList<IWebElement> FindElements(By by)
+        public static Elements FindElements(By by)
         {
-            return Current.FindElements(by);
+            return new Elements(Current.FindElements(by));
         }
 
         public static void Quit()
