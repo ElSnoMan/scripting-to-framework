@@ -41,8 +41,10 @@ We'll quickly wrap this chapter up by also extending a collection of IWebElement
 3. Solve the errors
 4. Then we'll add a really simple property called IsEmpty just so we can see that we can also add whatever functionality we need
     - public bool IsEmpty => Count == 0;
-5. Lastly, change the return type of Driver.FindElements() to Elements.
-    - return new Elements(Current.FindElements(by));
+5. We'll also add a FoundBy property so we can also track how we found the list of elements
+    - public By FoundBy { get; set; }
+6. Lastly, change the return type of Driver.FindElements() to Elements.
+    - return new Elements(Current.FindElements(by)) { FoundBy = by };
 
 ## That's it!
 Hopefully you can already see the potential for the crazy amount of things we can do now just by wrapping or extending objects. Being able to name our Element objects is just one thing, but I'm sure you can think of 2 or 3 more things right off the top of your head for things you can do.

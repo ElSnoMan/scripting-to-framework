@@ -13,6 +13,8 @@ namespace Framework.Selenium
             _elements = list;
         }
 
+        public By FoundBy { get; set; }
+
         public bool IsEmpty => Count == 0;
     }
 }
