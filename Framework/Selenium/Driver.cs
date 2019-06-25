@@ -16,8 +16,7 @@ namespace Framework.Selenium
 
         public static void Init(int waitSeconds = 10)
         {
-            FW.Log.Info("Open browser: Chrome");
-            _driver = new ChromeDriver();
+            _driver = DriverFactory.Build(FW.Config.Driver.Browser);
             Wait = new Wait(waitSeconds);
         }
 

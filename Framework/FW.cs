@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using Framework.Logging;
+using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace Framework
@@ -10,6 +11,8 @@ namespace Framework
     {
         public static string WORKSPACE_DIRECTORY = Path.GetFullPath(@"../../../../");
 
+        public static FwConfig Config => _configuration ?? throw new NullReferenceException("Config is null. Call FW.SetConfig() first.");
+
         public static Logger Log => _logger ?? throw new NullReferenceException("Logger is null. Call FW.SetLogger() first.");
 
         [ThreadStatic]
@@ -17,6 +20,8 @@ namespace Framework
 
         [ThreadStatic]
         private static Logger _logger;
+
+        private static FwConfig _configuration;
 
         public static DirectoryInfo CreateTestResultsDirectory()
         {
@@ -28,6 +33,15 @@ namespace Framework
             }
 
             return Directory.CreateDirectory(testResultsDirectory);
+        }
+
+        public static void SetConfig()
+        {
+            if (_configuration == null)
+            {
+                var jsonStr = File.ReadAllText(WORKSPACE_DIRECTORY + "/framework-config.json");
+                _configuration = JsonConvert.DeserializeObject<FwConfig>(jsonStr);
+            }
         }
 
         public static void SetLogger()
