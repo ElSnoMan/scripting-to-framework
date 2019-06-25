@@ -1,50 +1,16 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using Framework;
 using Framework.Models;
-using Framework.Selenium;
 using Framework.Services;
 using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using Royale.Pages;
+using Tests.Base;
 
 namespace Tests
 {
     [Parallelizable]
-    public class CardTests
+    public class CardTests : TestBase
     {
-        [OneTimeSetUp]
-        public void BeforeAll()
-        {
-            FW.SetConfig();
-            FW.CreateTestResultsDirectory();
-        }
-
-        [SetUp]
-        public void BeforeEach()
-        {
-            FW.SetLogger();
-            Driver.Init();
-            Pages.Init();
-            Driver.Goto(FW.Config.Test.Url);
-        }
-
-        [TearDown]
-        public void AfterEach()
-        {
-            Driver.Quit();
-        }
-
         static IList<Card> apiCards = new ApiCardService().GetAllCards();
-
-        [Test]
-        public void Mirror_is_on_cards_page()
-        {
-            var card = Pages.Cards.Goto().GetCardByName("Mirror");
-            Assert.That(card.Displayed);
-        }
 
         [Test, Parallelizable(ParallelScope.Children)]
         [TestCaseSource("apiCards")]

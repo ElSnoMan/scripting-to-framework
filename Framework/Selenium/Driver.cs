@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.IO;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 
 namespace Framework.Selenium
 {
@@ -46,6 +44,13 @@ namespace Framework.Selenium
             {
                 FoundBy = by
             };
+        }
+
+        public static void TakeScreenshot(string imageName)
+        {
+            var ss = ((ITakesScreenshot)Current).GetScreenshot();
+            var ssFileName = Path.Combine(FW.CurrentTestDirectory.FullName, imageName);
+            ss.SaveAsFile($"{ssFileName}.png", ScreenshotImageFormat.Png);
         }
 
         public static void Quit()
