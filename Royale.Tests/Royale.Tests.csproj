@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Royale\Royale.csproj" />
-    <ProjectReference Include="..\Framework\Framework.csproj" />
   </ItemGroup>
 
 </Project>
