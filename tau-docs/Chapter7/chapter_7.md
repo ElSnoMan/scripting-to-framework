@@ -14,7 +14,7 @@ There are a few scenarios:
 
 The first 3 scenarios are straightforward, but the last scenario has a very high number of combinations since Decks consist of 8 cards and we have 93 total cards...
 
-In this Chapter we'll only write the first 3 tests, but we'll get to the 4th test later on.
+In this Chapter we'll only write the first 3 tests.
 
 ## Create the first Copy Deck test
 We'll start with the easiest test which is that the user can copy the deck.

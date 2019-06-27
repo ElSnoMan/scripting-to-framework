@@ -13,7 +13,7 @@ namespace Framework.Selenium
             switch (browser)
             {
                 case "chrome":
-                    return new ChromeDriver();
+                    return BuildChrome();
 
                 case "firefox":
                     return new FirefoxDriver();
@@ -21,6 +21,13 @@ namespace Framework.Selenium
                 default:
                     throw new System.ArgumentException("Cannot build unsupported browser: " + browser);
             }
+        }
+
+        private static ChromeDriver BuildChrome()
+        {
+            var options = new ChromeOptions();
+            // options.AddArgument("--start-maximized");
+            return new ChromeDriver(options);
         }
     }
 }

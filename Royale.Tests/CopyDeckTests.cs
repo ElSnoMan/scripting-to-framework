@@ -13,7 +13,6 @@ namespace Tests
         {
             Pages.DeckBuilder.Goto().AddCardsManually();
             Pages.DeckBuilder.CopySuggestedDeck();
-            Assert.Fail();
             Pages.CopyDeck.Yes();
             Assert.AreEqual(Pages.CopyDeck.Map.CopiedMessage.Text, "If clicking \"Yes\" has no response, please try to open this page in a web browser.");
         }
@@ -25,7 +24,7 @@ namespace Tests
             Pages.DeckBuilder.Goto().AddCardsManually();
             Pages.DeckBuilder.CopySuggestedDeck();
             Pages.CopyDeck.No().OpenAppStore();
-            Assert.AreEqual("‎Clash Royale on the App Store", Driver.Title);
+            Assert.That(Driver.Title, Is.EqualTo("‎Clash Royale on the App Store"));
         }
 
         [Test]

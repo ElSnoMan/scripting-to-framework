@@ -22,7 +22,7 @@ namespace Royale.Pages
         public void AddCardsManually()
         {
             Map.AddCardsManuallyLink.Click();
-            Driver.Wait.Until(drvr => Map.CopyDeckIcon.Displayed);
+            Driver.Wait.Until(WaitConditions.ElementDisplayed(Map.CopyDeckIcon));
         }
 
         public void LoadCollection(string profileTag)

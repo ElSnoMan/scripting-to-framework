@@ -12,10 +12,15 @@ namespace Framework.Selenium
         [ThreadStatic]
         public static Wait Wait;
 
+        [ThreadStatic]
+        public static WindowManager Window;
+
         public static void Init(int waitSeconds = 10)
         {
             _driver = DriverFactory.Build(FW.Config.Driver.Browser);
             Wait = new Wait(waitSeconds);
+            Window = new WindowManager();
+            Window.Maximize();
         }
 
         public static IWebDriver Current => _driver ?? throw new NullReferenceException("_driver is null. Call Driver.Init() first.");
