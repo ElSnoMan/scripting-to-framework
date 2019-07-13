@@ -1,24 +1,18 @@
 # Copy Deck Test Suite
 Flow Through Multiple Pages and WebDriverWait
 
-The last suite of tests will be around the site's Deckbuilder functionality.
-On the Deck Builder page, users have the option to Copy the Deck.
+The last suite of tests will be around the site's Deckbuilder functionality. On the Deck Builder page, users have the option to Copy the Deck.
+
 This takes them to the Copy Deck Page where they can either Copy the Deck or go to the App Stores to download the app.
 We want to write tests against this page.
 
-There are a few scenarios:
+There are 3 scenarios:
 1. User has the app installed and clicks Yes to copy the deck
 2. User doesn't have the app installed and opens App Store
 3. User doesn't have the app installed and opens Google Play
-4. The Deck the user wants to copy from the Deck Builder Page is the same deck that is displayed on Copy Deck Page
-
-The first 3 scenarios are straightforward, but the last scenario has a very high number of combinations since Decks consist of 8 cards and we have 93 total cards...
-
-In this Chapter we'll only write the first 3 tests.
 
 ## Create the first Copy Deck test
-We'll start with the easiest test which is that the user can copy the deck.
-We'll write the test first and then refactor it into the Page Object Model.
+We'll start with the easiest test which is that the user can copy the deck. Some pieces will be accelerated, so feel free to pause as often as you need.
 
 1. In Royale.Tests, create the CopyDeckTests.cs class.
 2. Our [SetUp] and [TearDown] methods will be the exact same, so let's copy that from our CardTests.cs class.

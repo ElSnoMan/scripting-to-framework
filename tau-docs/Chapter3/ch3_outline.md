@@ -1,27 +1,43 @@
 # Chapter 3 - Page Object Model
 Refactoring - the Beginnings of a Framework
 
-We're currently working with 3 sections:
+Before we dive into the Page Object Model, I want to start with another amazing quote:
+
+"Code should be written to minimize the time it would take for someone else to understand it."
+
+That's our goal, and you should be using and following best practices, patterns, and other things that every other developer should be doing. We want to write awesome code!
+
+With that, we'll briefly talk about the Page Object Model and then we'll dive into code.
+
+## POM Diagrams
+
+In our tests, we're currently working with 3 sections:
 
 - Shared Header Navigation Bar
 - Cards Page
 - Card Details Page
 
-If you think of each page as an object with properties, then you can think of two primary things about the page:
+What we want to do is to represent these web pages as objects in code. If you think of each page as an object with properties, then you can think of two primary things about the page:
 
 1. Things on the page
 2. Things you can do on the page
 
-This is the very concept of the Page Object Model! In C#, I like to have two classes per page.
+This is the very concept of the Page Object Model!
 
-The first class is called the `Page Map` or just `Map`, and it answers the question: What is on the page? These are your elements!
+In C#, I like to have two classes per page. The first class is called the `Page Map` or just `Map`, and it answers the question: What is on the page? These are your elements!
 
-The second class, which is the main class, is simply the `Page Object` or just `Page`, and it answers the question: What can the user do on the page? These would be your functions and methods that use the elements in the Map to perform those user actions.
+The second class, which is the main class, is simply the `Page Object` or just `Page`, and it answers the question: What can the user do on the page?
 
-I call this approach the "Page Map Pattern" and it works really well with the Page Object Model. Separating the "what's on the page" and "what can you do on the page" into their own classes simplifies the overall structure and usability of the Page Objects.
+These would be your functions and methods that use the elements in the Map to perform those user actions.
+
+### transition
+
+I call this approach the "Page Map Pattern" and it works really well with the Page Object Model. Separating the concerns of "what's on the page" and "what you can do on the page" into their own classes simplifies the overall structure and usability of the Page Objects.
+
+However, I want to clarify that the Page Map Pattern is NOT required for the Page Object Model. It is a style pattern that I like to use in my frameworks.
 
 ## Refactor our tests into Page Objects
-We'll start cleaning the first test by refactoring things out of the Royale.Tests project. Your Page Objects will live in the Royale project and your tests will use those pages.
+We'll start with cleaning the first test by refactoring things out of the Royale.Tests project. Your Page Objects will live in the Royale project and your tests will use those pages.
 
 1. Open the Royale project
 2. Create a new folder called `Pages`
@@ -30,7 +46,7 @@ We'll start cleaning the first test by refactoring things out of the Royale.Test
 5. Create the HeaderNavMap class
 - The naming convention of pages and maps is very simple. Give your page a name. Your page class will be [name]Page and your map class will be [name]PageMap.
 
-> Disclaimer: We're about to start diving into C# and programming concepts, so please feel free to follow along as best as you can or pause to Google something you don't quite understand. Diving into C# is out of the scope of this course, but you are also welcome to ping me at any time with questions and I will do my best to answer. Ok, with that out of the way, let's get to it!
+> Disclaimer: We're about to start diving into C# and programming concepts, so please feel free to follow along as best as you can or pause to Google something you don't quite understand. Diving into C# is out of the scope of this course, but you are also welcome to ping me at any time with questions and I will do my best to answer. Ok, with that out of the way, let's dive in!
 
 ### Page Object Model - Refactoring Demo
 #### HeaderNav POM

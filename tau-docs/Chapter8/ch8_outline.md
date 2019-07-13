@@ -1,7 +1,8 @@
 # Logging
 Creating directories and logging to files
 
-Logging is a very important piece of programming because it helps us locate issues when we inevitably have to debug a problem.
+Logging is a very important strategy to programming because it helps us locate issues when we inevitably have to debug a problem.
+
 There are MANY ways to handle your Logging Strategy like using an existing Logging Library like Log4Net or a service like Loggly. For this course, we'll simply log to a .txt file. It may not sound as awesome as "Logger as a Service", but your CI/CD pipelines can easily work with artifacts your test runs generate and these log files are a piece of cake.
 
 Another benefit is seeing how to read and write to files using C# which has many applications outside of just logging. Let's dive in.
@@ -41,7 +42,7 @@ Let's add our new Framework methods to the tests!
 5. Yay! We now a Test Results directory for our test run and each test has its own folder and log.
 
 ## Solving Race Conditions
-But before we call it a day, let's try running our parallel tests.
+But before we call it a day, did you try running our parallel tests?
     - dotnet test --filter card_is_on_cards_page -- NUnit.NumberOfTestWorkers=3
 Our tests are executing in parallel as expected, but there is only one test folder in our Test Results. What happened? Well, our test is technically a single test method with a single name, so if we are creating our test folder based on the name of the test, then each test case has the same name! That means each new test case is overriding the test folder and test log of the previous test case. This is an example of a "Race Condition"
 
@@ -58,19 +59,3 @@ Let's solve this by forcing the workers to "wait in a line" when creating the di
 3. Save this and run those tests again.
 
 And check it out... each test case now has a its own test folder and log as expected.
-
-## Challenge
-If you run the Base_Metrics test in CardTests, you will see errors like "Troop" does not equal "tid_card_type_character", etc. The API returns types in the form of "tid_card_type_character", with the last word actually being the type. The website shows characters as "troops".
-
-Your job is to "fix the bugs". We want to consider "troop" and "character" as the same thing rather than failing the test.
-
-The API returns types as
-- tid_card_type_character
-- tid_card_type_spell
-- tid_card_type_building
-
-1. Fix "tid_card_type_character does not equal Troop" error
-2. Fix "tid_card_type_spell does not equal Spell" error
-3. Fix "tid_card_type_building does not equal Building" error
-
-NOTE: There are a lot of ways to solve this, just like everything we've been doing. The main goal is to fix these issues without touching the tests. Give it your best shot!

@@ -31,17 +31,18 @@ namespace Tests.Base
 
             if (outcome == TestStatus.Passed)
             {
-                FW.Log.Info("Outcome = Passed");
+
             }
             else if (outcome == TestStatus.Failed)
             {
-                FW.Log.Info("Outcome = Failed");
                 Driver.TakeScreenshot("test_failed");
             }
             else
             {
-                FW.Log.Warning("Outcome = " + outcome);
+
             }
+
+            FW.Log.Info("Outcome: " + outcome);
 
             Driver.Quit();
         }

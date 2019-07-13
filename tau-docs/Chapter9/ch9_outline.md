@@ -1,7 +1,9 @@
 # Element and Elements
 Extending IWebElement
 
-In this chapter, we're going to focus on the IWebElement interface. Just like how we wrapped IWebDriver into our own Driver class, we want to do something very similar with IWebElement. Like Driver, logging was a good reason for this, but we can then create any functionality and tie it to the Element object we use throughout our Page Objects and tests.
+In this chapter, we're going to focus on the IWebElement interface. With IWebDriver, we wrapped it into our own Driver class.
+
+We want to do something very similar with IWebElement, but instead of wrapping IWebElement, we'll be extending it. Like Driver, logging was a good reason for this, but we can then create any functionality and tie it to the Element object we use throughout our Page Objects and tests.
 
 In the last chapter, we added some logging to our DeckBuilderPage class, but all we were saying was "Click this element" right before we actually clicked that element. It would be much cleaner to just have .Click() log the step for us automatically! We do not get that functionality out of the box, but we can add it once we extend IWebElement. Let's get started.
 
@@ -25,7 +27,7 @@ We'll keep returning to the Element class, but now we need to go to the Driver c
     - Notice how we get zero errors even though we changed the return type? That's because Element is an IWebElement, remember??
 2. Now we have to update our Page Objects to use the new Element class
     - shortcut to Find and Replace
-    - shortcut to edit multiple lines at the same time
+    - shortcut to edit multiple lines at the same time (SHIFT + OPTION + Click)
 
 ## Let's see the new logs!
 1. Let's remove those hard-coded pieces in the DeckBuilderPage class
@@ -34,7 +36,7 @@ We'll keep returning to the Element class, but now we need to go to the Driver c
 3. Looks like we have a log file that actually shows what our test is doing. That's what I'm talking about!
 
 ## Extending IList<IWebElement>
-We'll quickly wrap this chapter up by also extending a collection of IWebElements. We aren't using this in our Page Objects yet, but it's a great time to do it.
+We'll quickly wrap this chapter up by also extending a collection of IWebElements. We aren't using this in our Pages yet, but it's a great time to do it.
 
 1. Create an Elements.cs class in Framework.Selenium
 2. For simplicity's sake, we'll just inherit ReadOnlyCollection<IWebElement>
@@ -47,4 +49,4 @@ We'll quickly wrap this chapter up by also extending a collection of IWebElement
     - return new Elements(Current.FindElements(by)) { FoundBy = by };
 
 ## That's it!
-Hopefully you can already see the potential for the crazy amount of things we can do now just by wrapping or extending objects. Being able to name our Element objects is just one thing, but I'm sure you can think of 2 or 3 more things right off the top of your head for things you can do.
+Hopefully you can already see the potential for the crazy amount of things we can do now just by wrapping or extending objects. Being able to name our Element objects is just one thing, but I'm sure you can think of 2 or 3 more things right off the top of your head for things you can do. Go out there and customize those elements.

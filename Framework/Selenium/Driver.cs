@@ -40,7 +40,10 @@ namespace Framework.Selenium
 
         public static Element FindElement(By by, string elementName)
         {
-            return new Element(Current.FindElement(by), elementName);
+            return new Element(Current.FindElement(by), elementName)
+            {
+                FoundBy = by
+            };
         }
 
         public static Elements FindElements(By by)

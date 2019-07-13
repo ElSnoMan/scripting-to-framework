@@ -1,13 +1,19 @@
 # Using Test Data from an API
 API Endpoint: https://statsroyale.com/api/cards
 
-Right now we have hard-coded two cards - Ice Spirit and Mirror. However, there are tons of cards that we currently aren't testing.
-We could go through each one and hard-code these too, but our devs are grabbing these lists of cards from the database using REST endpoints.
+Right now we have hard-coded two cards - Ice Spirit and Mirror, but we know there are tons of cards that we currently aren't testing.
+
+We could go through each one and hard-code these too, but our devs are grabbing a list of cards from the database using REST endpoints.
+
 As Automation Engineers, it is a requirement that we know how to work with the data our devs are using too. Especially in the world of microservices where transactions are happening across multiple calls and services.
 
-There are so many pros to this approach, but just think about this one scenario... If they add a new card with the next release, how would we handle that new card? Our current implementation would have us create a NewCard.cs file that inherits from Card and then find out what the values are for us to hard-code them too. However, they will be adding that new card to the database which will get picked up by the endpoints they're already using. If we also leveraged that same endpoint in our tests, then we wouldn't have to make any code changes because we would already have the new card as well!
+There are so many pros to this approach, but just think about this one scenario...
 
-Let's dive right back into code and see what live endpoint that we can view with PostMan and bring into our framework and tests.
+If they add a new card with the next release, how would we handle that new card? Our current implementation would have us create a NewCard.cs file that inherits from Card and then find out what the values are for us to hard-code them too.
+
+If you think about it, they will be adding that new card to the database which will get picked up by the endpoints they're already using. If we also leveraged that same endpoint in our tests, then we wouldn't have to make any code changes because we would already have the new card as well!
+
+Let's dive right back into code, starting with Postman, to see the endpoint that we'll bring into our framework and tests.
 
 ## Use PostMan to look at our /cards endpoint
 1. Open PostMan and paste in "https://statsroyale.com/api/cards"
@@ -21,9 +27,9 @@ Let's dive right back into code and see what live endpoint that we can view with
 4. Let's go back to our Card.cs class and add the `Id` and `Icon` properties
 5. The awesome thing is that now we have a list of all the cards that are in the game! We don't have to store this ourselves if we don't want to.
 
-Having this is obviously helpful, but we want to leverage it in our Framework so our tests can use it too.
-
 ## Calling a REST endpoint from our Framework
+We want to leverage that endpoint it in our Framework so our tests can use that list of cards. We'll be creating an ApiCardService for this.
+
 1. `PackSharp: Add Package` to install `RestSharp` and `Newtonsoft.Json`into our Framework project
 2. In Framework.Services, we'll make a new class called ApiCardService.cs
 3. We want it to implement our ICardService as well. We don't have a way to get a single card from the API yet, so let's leave the NotImplementedException() for now.
@@ -33,7 +39,7 @@ Having this is obviously helpful, but we want to leverage it in our Framework so
 7. Add implementation to GetCardByName() by using GetAllCards(). We'll do it this way just because we don't have an endpoint to get a single card.
 
 ## Using our ApiCardService in our tests
-With our ApiCardService complete, we can use them with our existing tests to validate ALL of the cards instead of the two we defined.
+With our ApiCardService complete, we can use it with our existing tests to validate ALL of the cards instead of just the two we defined.
 
 1. Replace `cardsNames` with `apiCards` that uses our ApiCardService.GetAllCards()
     - static IList<Card> apiCards = new ApiCardService.GetAllCards();
@@ -42,11 +48,7 @@ With our ApiCardService complete, we can use them with our existing tests to val
 4. If you want to run the tests, just make sure to specify the number of test workers to use because there are a lot more than just 2 cards now
     - `dotnet test --filter name=card_is_on_cards_page -- NUnit.NumberOfTestWorkers=4`
     - You can probably run 2-4 tests at one time. It really depends how powerful your machine is.
-5. Well now we know there are 93 different cards! Our single test method turned into 93 tests!
-6. Now, I would argue that these tests might be better served as lower-level tests, but look how easy it was for us to leverage a single endpoint to ramp up almost 200 tests using only two test methods. It's pretty awesome stuff.
 
-## Update ICardService
-Before we move on, I would like to make a change to our ICardService interface. I think that any Card Service we have should really have the capability to return a list of all the cards we have available. Let's make that change.
+Ok, I have to explain what's going on because we just did something pretty insane. As you know, we've only written two test methods. BUT! Because we are using a TestCaseSource that is coming directly from the /cards API, our two test methods have multiple test cases. 93 to be in exact. There are 93 different cards and we have all of them and are feeding them into our tests.
 
-1. In ICardService, add the GetAllCards() method.
-2. Add the implementation to our InMemoryCardService class with a helpful exception.
+Now, I would argue that these tests might be better served as lower-level tests, but look how easy it was for us to leverage a single endpoint to ramp up almost 200 tests using only two test methods. The code we just typed is pretty finger-licking good.

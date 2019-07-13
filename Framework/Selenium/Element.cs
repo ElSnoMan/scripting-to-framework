@@ -11,6 +11,8 @@ namespace Framework.Selenium
 
         public readonly string Name;
 
+        public By FoundBy { get; set; }
+
         public Element(IWebElement element, string name)
         {
             _element = element;

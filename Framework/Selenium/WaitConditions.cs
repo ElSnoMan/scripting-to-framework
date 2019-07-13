@@ -15,6 +15,30 @@ namespace Framework.Selenium
             return condition;
         }
 
+        /// <summary>
+        /// Example of more complex condition that returns the element.
+        /// </summary>
+        public static Func<IWebDriver, IWebElement> ElementIsDisplayed(IWebElement element)
+        {
+            IWebElement condition(IWebDriver driver)
+            {
+                try
+                {
+                    return element.Displayed ? element : null;
+                }
+                catch (NoSuchElementException)
+                {
+                    return null;
+                }
+                catch (ElementNotVisibleException)
+                {
+                    return null;
+                }
+            }
+
+            return condition;
+        }
+
         public static Func<IWebDriver, bool> ElementNotDisplayed(IWebElement element)
         {
             bool condition(IWebDriver driver)
