@@ -47,6 +47,12 @@ namespace Framework.Selenium
             Current.Click();
         }
 
+        public void Hover()
+        {
+            var actions = new Actions(Driver.Current);
+            actions.MoveToElement(Current).Perform();
+        }
+
         public IWebElement FindElement(By by)
         {
             return Current.FindElement(by);
@@ -70,12 +76,6 @@ namespace Framework.Selenium
         public string GetProperty(string propertyName)
         {
             return Current.GetProperty(propertyName);
-        }
-
-        public void Hover()
-        {
-            var actions = new Actions(Driver.Current);
-            actions.MoveToElement(Current).Perform();
         }
 
         public void SendKeys(string text)
